@@ -1,190 +1,105 @@
 # Refynd Application
 
-> **"Your next great application starts with Refynd."**
+> **"Your next great application starts here."**
 
-A modern PHP application built with the [Refynd Framework](https://github.com/refynd/framework). This skeleton provides everything you need to start building exceptional web applications with elegant simplicity and enterprise-grade power.
+This is a Refynd application created from the official application skeleton. Refynd combines enterprise-grade power with elegant simplicity to help you craft exceptional web applications.
 
 ## 🚀 Quick Start
 
 ### Installation
 
-Create a new Refynd application:
-
 ```bash
+# Create a new Refynd application
 composer create-project refynd/refynd my-app
 cd my-app
+
+# Set up environment
+cp .env.example .env
+
+# Start development server
+composer serve
 ```
 
-### Configuration
+Your application will be available at http://localhost:8000
 
-1. **Environment Setup**
-   ```bash
-   cp .env.example .env
-   ```
-   
-2. **Edit your `.env` file** with your application settings
+### Development
 
-3. **Start Development Server**
-   ```bash
-   composer serve
-   ```
+```bash
+# Install dependencies
+composer install
 
-4. **Visit your application** at `http://localhost:8000`
+# Run tests
+composer test
+
+# Static analysis
+composer analyse
+
+# Development server
+composer serve
+```
 
 ## 📁 Project Structure
 
 ```
 my-app/
-├── app/
-│   ├── Bootstrap/          # Application configuration
-│   ├── Controllers/        # HTTP controllers
-│   ├── Models/            # Data models
-│   └── Middleware/        # Custom middleware
-├── config/                # Configuration files
-├── public/                # Web server document root
-│   └── index.php         # Application entry point
-├── resources/
-│   ├── views/            # Prism templates
-│   └── assets/           # CSS, JS, images
-├── routes/
-│   └── web.php          # Application routes
-├── storage/
-│   ├── cache/           # Application cache
-│   ├── logs/            # Log files
-│   └── app/             # Application files
-├── tests/
-│   ├── Unit/            # Unit tests
-│   └── Feature/         # Feature tests
-├── .env.example         # Environment configuration template
-└── composer.json        # Dependencies and scripts
+├── app/                 # Application logic
+│   ├── Controllers/     # HTTP controllers
+│   ├── Models/         # Database models
+│   ├── Middleware/     # Custom middleware
+│   └── Bootstrap/      # Application bootstrap
+├── config/             # Configuration files
+├── public/             # Web server document root
+├── resources/          # Views, assets, etc.
+│   ├── views/         # Prism templates
+│   └── assets/        # CSS, JS, images
+├── routes/             # Route definitions
+├── storage/            # Cache, logs, uploads
+└── tests/              # Test suite
 ```
 
-## 🎯 What's Included
+## 🎯 Features Included
 
-### 📄 Sample Pages
-- **Home Page** - Welcome page with framework overview
-- **About Page** - Information about your application  
-- **Contact Page** - Contact form with validation
-- **API Endpoints** - RESTful API examples
+- **🏠 Welcome Pages** - Beautiful homepage and about page
+- **📧 Contact Form** - Working contact form with validation
+- **🔌 API Endpoints** - Sample REST API routes
+- **🎨 Prism Templates** - Elegant view templates
+- **✅ Form Validation** - Built-in validation examples
+- **💾 Caching Examples** - Cache implementation samples
+- **🧪 Test Suite** - Ready-to-use testing setup
 
-### 🛠️ Sample Components
-- **Controllers** - Home and API controllers with examples
-- **Models** - User model demonstrating ORM features
-- **Views** - Prism templates with layouts and components
-- **Routes** - Web and API route definitions
-- **Tests** - Unit and feature test examples
+## 📚 Next Steps
 
-### ⚙️ Configuration
-- **Environment Variables** - Comprehensive `.env` configuration
-- **Database Settings** - MySQL/PostgreSQL/SQLite support
-- **Cache Configuration** - File, Redis, Memcached options
-- **Application Settings** - Debug, timezone, URL configuration
+1. **Configure Database** - Update `.env` with your database credentials
+2. **Customize Templates** - Edit views in `resources/views/`
+3. **Add Routes** - Define new routes in `routes/web.php`
+4. **Create Controllers** - Add controllers in `app/Controllers/`
+5. **Build Models** - Create models in `app/Models/`
 
-## 🔧 Development
+## �� Configuration
 
-### Available Commands
+Edit your `.env` file to configure:
 
-```bash
-# Start development server
-composer serve
+- **Database Connection** - MySQL, PostgreSQL, SQLite
+- **Cache Driver** - File, Redis, Memcached
+- **Application Settings** - Name, environment, debug mode
 
-# Run tests
-composer test
+## 📖 Documentation
 
-# Run static analysis
-composer analyse
-
-# Install dependencies
-composer install
-
-# Update dependencies
-composer update
-```
-
-### Testing
-
-Run the test suite:
-
-```bash
-composer test
-```
-
-The application includes sample tests demonstrating:
-- Unit testing with PHPUnit
-- Model testing
-- Feature testing patterns
-
-### Code Quality
-
-Analyze code quality:
-
-```bash
-composer analyse
-```
-
-Uses PHPStan for static analysis to catch potential issues early.
-
-## 🌐 Deployment
-
-### Production Setup
-
-1. **Install dependencies**
-   ```bash
-   composer install --no-dev --optimize-autoloader
-   ```
-
-2. **Configure environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env with production settings
-   ```
-
-3. **Set permissions**
-   ```bash
-   chmod -R 755 storage
-   ```
-
-4. **Configure web server** to point to the `public/` directory
-
-### Environment Variables
-
-Key environment variables to configure:
-
-```env
-APP_ENV=production          # Set to production
-APP_DEBUG=false            # Disable debug mode
-APP_URL=https://yourdomain.com
-
-DB_CONNECTION=mysql        # Database driver
-DB_HOST=127.0.0.1         # Database host
-DB_DATABASE=your_db       # Database name
-DB_USERNAME=your_user     # Database user
-DB_PASSWORD=your_pass     # Database password
-
-CACHE_DRIVER=redis        # Production cache driver
-```
-
-## 📚 Documentation
-
-- **[Refynd Framework Docs](https://github.com/refynd/framework/docs)** - Complete framework documentation
-- **[Framework Capabilities](https://github.com/refynd/framework/docs/CURRENT_CAPABILITIES.md)** - Feature overview
-- **[What You Can Build](https://github.com/refynd/framework/docs/WHAT_YOU_CAN_BUILD.md)** - Application examples
+- **[Refynd Framework](https://github.com/refynd/framework)** - Core framework repository
+- **[Framework Documentation](https://github.com/refynd/framework/docs)** - Complete guides
+- **[API Reference](https://github.com/refynd/framework/wiki)** - Detailed API docs
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Found a bug or want to contribute? Check out the [Refynd Framework](https://github.com/refynd/framework) repository.
 
 ## 📜 License
 
-This project is open-source software licensed under the [MIT license](LICENSE).
+This application skeleton is open-source software licensed under the [MIT license](LICENSE).
 
 ---
 
 <p align="center">
 <strong>Ready to forge something extraordinary?</strong><br>
-<em>Your next great application starts with Refynd.</em>
+<em>Build amazing applications with Refynd.</em>
 </p>
