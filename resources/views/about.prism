@@ -1,0 +1,43 @@
+@extends('layouts.app')
+
+@section('title', '{{ $title }}')
+@section('heading', 'About Refynd')
+
+@section('content')
+<div class="card">
+    <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: #333;">
+        About This Application
+    </h2>
+    
+    <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; text-align: center;">
+            This is a Refynd application, built with version <strong>{{ $version }}</strong> of the framework.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+            <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">🎯 Philosophy</h3>
+                <p style="color: #666;">
+                    "In the forge of code, we craft not just software, but experiences." 
+                    Refynd believes that great software emerges when powerful architecture meets intuitive design.
+                </p>
+            </div>
+            
+            <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">⚡ Performance</h3>
+                <p style="color: #666;">
+                    Built for speed and scalability, Refynd provides efficient caching, 
+                    lazy loading, and optimized component initialization out of the box.
+                </p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="/" class="btn">Back to Home</a>
+            <a href="/contact" class="btn" style="background: linear-gradient(135deg, #11998e, #38ef7d); margin-left: 1rem;">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</div>
+@endsection

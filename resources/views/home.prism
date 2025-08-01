@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('title', '{{ $title }}')
+@section('heading', 'Welcome to Refynd')
+
+@section('content')
+<div class="card">
+    <div style="text-align: center;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #333;">{{ $message }}</h2>
+        
+        <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Your Refynd application is up and running! This elegant framework combines enterprise-grade power 
+            with beautiful simplicity, empowering you to craft exceptional web experiences.
+        </p>
+        
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
+            <a href="/about" class="btn">Learn More</a>
+            <a href="/contact" class="btn" style="background: linear-gradient(135deg, #11998e, #38ef7d);">Get Started</a>
+        </div>
+        
+        <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+            <h3 style="margin-bottom: 1rem; color: #333;">Quick Features Overview</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: left;">
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 0.5rem;">🏗️ Dependency Injection</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Powerful IoC container with automatic resolution</p>
+                </div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 0.5rem;">🚀 HTTP Routing</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Expressive routes with middleware support</p>
+                </div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 0.5rem;">💾 Multi-Driver Caching</h4>
+                    <p style="color: #666; font-size: 0.9rem;">File, Redis, Memcached, and Array stores</p>
+                </div>
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 0.5rem;">🎨 Prism Templates</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Elegant templating with Blade-like syntax</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

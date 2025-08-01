@@ -1,0 +1,45 @@
+# Dependencies
+/vendor/
+composer.lock
+
+# Environment
+.env
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Application
+/storage/cache/*
+/storage/logs/*
+/storage/app/*
+!storage/cache/.gitkeep
+!storage/logs/.gitkeep
+!storage/app/.gitkeep
+
+# Testing and Coverage
+/coverage/
+.phpunit.result.cache
+.phpunit.cache/
+
+# Development tools
+.php_cs.cache
+.php-cs-fixer.cache
+.phpstan.cache
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
