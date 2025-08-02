@@ -13,11 +13,11 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "php": "^8.2",
-    "refynd/framework": "^1.2"
+    "php": "^8.4",
+    "refynd/framework": "^2.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^11.0",
+    "phpunit/phpunit": "^11.5",
     "phpstan/phpstan": "^1.0"
   },
   "autoload": {
@@ -36,16 +36,25 @@
   "scripts": {
     "serve": "php -S localhost:8000 -t public",
     "test": "phpunit",
+    "test:coverage": "phpunit --coverage-html coverage",
     "analyse": "phpstan analyse app --level=6",
+    "check": [
+      "@analyse",
+      "@test"
+    ],
     "post-create-project-cmd": [
       "@php -r \"copy('.env.example', '.env');\"",
-      "@php -r \"echo 'Refynd application created successfully!\\\\n';\""
+      "@php -r \"echo '🚀 Refynd application created successfully!\\\\n';\"",
+      "@php -r \"echo '💡 Visit http://localhost:8000 to get started\\\\n\\\\n';\""
     ]
   },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    }
   },
   "minimum-stability": "stable",
   "prefer-stable": true

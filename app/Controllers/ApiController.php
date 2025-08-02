@@ -2,66 +2,60 @@
 
 namespace App\Controllers;
 
-use Refynd\Http\Request;
-use Refynd\Http\Response;
-use Refynd\Cache\Cache;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\User;
 
 class ApiController
 {
     public function status(Request $request): Response
     {
-        return response()->json([
+        return new JsonResponse([
             'status' => 'ok',
-            'timestamp' => time(),
-            'version' => '1.0.0',
-            'framework' => 'Refynd'
+            'message' => 'API is running',
+            'version' => '2.0.0',
+            'timestamp' => date('c')
         ]);
     }
-    
+
     public function users(Request $request): Response
     {
-        // Example using cache
-        $users = Cache::remember('api.users', 300, function() {
-            // In a real app, this would fetch from database
-            return [
-                ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
-                ['id' => 2, 'name' => 'Jane Smith', 'email' => 'jane@example.com'],
-            ];
-        });
-        
-        return response()->json([
-            'success' => true,
-            'data' => $users
+        // Sample users data - in a real app, this would come from database
+        $users = [
+            ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
+            ['id' => 2, 'name' => 'Jane Smith', 'email' => 'jane@example.com'],
+            ['id' => 3, 'name' => 'Bob Johnson', 'email' => 'bob@example.com']
+        ];
+
+        return new JsonResponse([
+            'data' => $users,
+            'count' => count($users)
         ]);
     }
-    
+
     public function createUser(Request $request): Response
     {
-        $validator = new \Refynd\Validation\Validator($request->all(), [
-            'name' => 'required|string|min:2',
-            'email' => 'required|email|unique:users',
-        ]);
+        $data = $request->request->all();
         
-        if ($validator->fails()) {
-            return response()->json([
+        // Basic validation
+        if (empty($data['name']) || empty($data['email'])) {
+            return new JsonResponse([
                 'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
+                'message' => 'Name and email are required'
+            ], 400);
         }
-        
-        // Example user creation (would typically use database)
+
+        // In a real application, you would save to database
+        // For demo purposes, we'll just return the created user
         $user = [
             'id' => rand(1000, 9999),
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'created_at' => date('Y-m-d H:i:s')
+            'name' => $request->request->get('name'),
+            'email' => $request->request->get('email'),
+            'created_at' => date('c')
         ];
-        
-        // Clear users cache
-        Cache::forget('api.users');
-        
-        return response()->json([
+
+        return new JsonResponse([
             'success' => true,
             'message' => 'User created successfully',
             'data' => $user

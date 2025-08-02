@@ -20,3 +20,19 @@ if (!function_exists('collect')) {
         return new \Refynd\Database\Collection($items);
     }
 }
+
+if (!function_exists('view')) {
+    function view(string $template, array $data = []): string
+    {
+        global $container;
+        $prism = $container->make(\Refynd\Prism\PrismEngine::class);
+        return $prism->render($template, $data);
+    }
+}
+
+if (!function_exists('response')) {
+    function response(string $content = '', int $status = 200, array $headers = []): \Symfony\Component\HttpFoundation\Response
+    {
+        return new \Symfony\Component\HttpFoundation\Response($content, $status, $headers);
+    }
+}

@@ -34,10 +34,10 @@ class User extends Model
     
     public function isVerified(): bool
     {
-        return !is_null($this->email_verified_at);
+        return !is_null($this->getAttribute('email_verified_at'));
     }
     
-    public function __get(string $key)
+    public function __get(string $key): mixed
     {
         // Handle display_name accessor
         if ($key === 'display_name') {
@@ -49,6 +49,8 @@ class User extends Model
     
     public function getDisplayNameAttribute(): string
     {
-        return $this->name ?: $this->email;
+        $name = $this->getAttribute('name');
+        $email = $this->getAttribute('email');
+        return $name ?: $email ?: '';
     }
 }
