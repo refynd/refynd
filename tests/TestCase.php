@@ -14,7 +14,11 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         
-        $this->app = new Engine(new AppProfile());
+        $profile = new AppProfile();
+        $this->app = new Engine($profile);
+        
+        // Register routes after engine is initialized
+        $profile->registerRoutes();
     }
     
     protected function tearDown(): void

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Refynd\Database\Record;
+use Refynd\Database\Model;
 
-class User extends Record
+class User extends Model
 {
     protected string $table = 'users';
     
@@ -35,6 +35,16 @@ class User extends Record
     public function isVerified(): bool
     {
         return !is_null($this->email_verified_at);
+    }
+    
+    public function __get(string $key)
+    {
+        // Handle display_name accessor
+        if ($key === 'display_name') {
+            return $this->getDisplayNameAttribute();
+        }
+        
+        return parent::__get($key);
     }
     
     public function getDisplayNameAttribute(): string

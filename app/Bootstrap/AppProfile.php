@@ -8,90 +8,65 @@ class AppProfile extends BaseAppProfile
 {
     public function __construct()
     {
-        // Load environment variables
-        $this->loadEnvironment();
+        // Determine the base path (assuming this is in app/Bootstrap/)
+        $basePath = dirname(dirname(__DIR__));
         
-        // Set application configurations
-        $this->setConfigurations([
-            'app' => [
-                'name' => env('APP_NAME', 'Refynd Application'),
-                'env' => env('APP_ENV', 'production'),
-                'debug' => env('APP_DEBUG', false),
-                'url' => env('APP_URL', 'http://localhost'),
-                'timezone' => env('APP_TIMEZONE', 'UTC'),
-            ],
-            
-            'database' => [
-                'default' => env('DB_CONNECTION', 'mysql'),
-                'connections' => [
-                    'mysql' => [
-                        'driver' => 'mysql',
-                        'host' => env('DB_HOST', '127.0.0.1'),
-                        'port' => env('DB_PORT', '3306'),
-                        'database' => env('DB_DATABASE', 'refynd'),
-                        'username' => env('DB_USERNAME', 'root'),
-                        'password' => env('DB_PASSWORD', ''),
-                        'charset' => 'utf8mb4',
-                        'collation' => 'utf8mb4_unicode_ci',
-                    ],
-                ],
-            ],
-            
-            'cache' => [
-                'default' => env('CACHE_DRIVER', 'file'),
-                'stores' => [
-                    'file' => [
-                        'driver' => 'file',
-                        'path' => __DIR__ . '/../../storage/cache',
-                    ],
-                    'redis' => [
-                        'driver' => 'redis',
-                        'host' => env('REDIS_HOST', '127.0.0.1'),
-                        'password' => env('REDIS_PASSWORD', null),
-                        'port' => env('REDIS_PORT', 6379),
-                        'database' => env('REDIS_DB', 0),
-                    ],
-                ],
-            ],
-            
-            'view' => [
-                'paths' => [
-                    __DIR__ . '/../../resources/views',
-                ],
-                'compiled' => __DIR__ . '/../../storage/cache/views',
-            ],
+        // Load environment and initialize parent
+        parent::__construct($basePath);
+        
+        // Set application-specific configurations
+        $this->configureApplication();
+    }
+    
+    protected function configureApplication(): void
+    {
+        // App configuration
+        $this->set('app.name', env('APP_NAME', 'Refynd Application'));
+        $this->set('app.env', env('APP_ENV', 'production'));
+        $this->set('app.debug', env('APP_DEBUG', false));
+        $this->set('app.url', env('APP_URL', 'http://localhost'));
+        $this->set('app.timezone', env('APP_TIMEZONE', 'UTC'));
+        
+        // Database configuration
+        $this->set('database.default', env('DB_CONNECTION', 'mysql'));
+        $this->set('database.connections.mysql', [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'refynd'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
         ]);
         
-        // Register routes
-        $this->registerRoutes();
+        // Cache configuration
+        $this->set('cache.default', env('CACHE_DRIVER', 'file'));
+        $this->set('cache.stores.file', [
+            'driver' => 'file',
+            'path' => $this->storagePath('cache'),
+        ]);
+        $this->set('cache.stores.redis', [
+            'driver' => 'redis',
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => env('REDIS_DB', 0),
+        ]);
+        
+        // View configuration
+        $this->set('view.paths', [
+            $this->path('resources/views'),
+        ]);
+        $this->set('view.compiled', $this->storagePath('cache/views'));
     }
     
-    private function loadEnvironment(): void
+    public function registerRoutes(): void
     {
-        $envFile = __DIR__ . '/../../.env';
-        if (file_exists($envFile)) {
-            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            foreach ($lines as $line) {
-                if (strpos(trim($line), '#') === 0) {
-                    continue;
-                }
-                
-                [$name, $value] = explode('=', $line, 2);
-                $name = trim($name);
-                $value = trim($value, " \t\n\r\0\x0B\"'");
-                
-                if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
-                    putenv(sprintf('%s=%s', $name, $value));
-                    $_ENV[$name] = $value;
-                    $_SERVER[$name] = $value;
-                }
-            }
+        $routesFile = $this->path('routes/web.php');
+        if (file_exists($routesFile)) {
+            require_once $routesFile;
         }
-    }
-    
-    private function registerRoutes(): void
-    {
-        require_once __DIR__ . '/../../routes/web.php';
     }
 }
 
